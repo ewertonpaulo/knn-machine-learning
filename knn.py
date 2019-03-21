@@ -2,17 +2,17 @@ from operator import itemgetter
 from math import sqrt
 from csv_handler import train_test_split
 
-def euclidean_distance(features, predict, length):
-    distance = 0
+def euclidean_distancia(text, prredc, length):
+    distancia = 0
     for x in range(length):
-        distance += pow((features[x] - predict[x]), 2)
-    return sqrt(distance)
+        distancia += pow((text[x] - prredc[x]), 2)
+    return sqrt(distancia)
 
 def get_vizinhos(train, test, k):
     distancia = []
     tamanho = len(test)-1
     for x in range(len(train)):
-        euc = euclidean_distance(test, train[x], tamanho)
+        euc = euclidean_distancia(test, train[x], tamanho)
         distancia.append((train[x], euc))
 
     distancia.sort(key=itemgetter(1))
