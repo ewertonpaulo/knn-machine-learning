@@ -5,7 +5,7 @@ from csv_handler import train_test_split
 def euclidean_distancia(text, prredc, length):
     distancia = 0
     for x in range(length):
-        distancia += pow((text[x] - prredc[x]), 2)
+        distancia += (text[x] - prredc[x])**2
     return sqrt(distancia)
 
 def get_vizinhos(train, test, k):
@@ -13,13 +13,12 @@ def get_vizinhos(train, test, k):
     tamanho = len(test)-1
     for x in range(len(train)):
         euc = euclidean_distancia(test, train[x], tamanho)
-        distancia.append((train[x], euc))
+        distancia.append([train[x], euc])
 
     distancia.sort(key=itemgetter(1))
     vizinhos = []
     for x in range(k):
         vizinhos.append(distancia[x][0])
-
     return vizinhos
 
 def resposta(vizinhos):
@@ -47,7 +46,8 @@ def data_to_validate(df):
 
 def precisao(validate, predict): 
     goal = 0
-    for x in range(len(validate)):
+    quant = len(validate)
+    for x in range(quant):
         if float(validate[x]) == predict[x]: 
             goal = goal + 1
-    return (goal/float(len(validate))*100)
+    return (goal/float(quant)*100)
